@@ -19,19 +19,23 @@ import LoginSubmitButton from '../shared/login_submit_button';
 //     })
 // })
 
-export default function LoginForm() {
+export default function LoginForm({submitLoginForm}) {
 
     return (
       <View style={globalStyles.container}>
         <Formik
           initialValues={{ Username: '', Password: ''}}
+          onSubmit={(values, actions)=>{
+            actions.resetForm();
+            submitLoginForm(values);
+          }}
         >
           {(props)=>(
             <View>
               <TextInput
                 style={globalStyles.input}
                 placeholder='Username'
-                onChangeText={props.handleChange('title')}
+                onChangeText={props.handleChange('Username')}
                 value={props.values.title}
               />
 
@@ -39,7 +43,7 @@ export default function LoginForm() {
                 secureTextEntry={true}
                 style={globalStyles.input}
                 placeholder='Password'
-                onChangeText={props.handleChange('body')}
+                onChangeText={props.handleChange('Password')}
                 value={props.values.body}
               />
 

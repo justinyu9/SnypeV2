@@ -31,16 +31,16 @@ const reviewSchema = yup.object({
     .matches(phoneRegExp, 'Phone number is not valid')
 })
 
-export default function SignUpForm() {
+export default function SignUpForm({submitSignUpForm}) {
 
     return (
       <View style={globalStyles.container}>
         <Formik
-          initialValues={{ title: '', body: '', rating: ''}}
+          initialValues={{ username: '', email: '', password: '',  verify_password: '',  phone_number: ''}}
           validationSchema={reviewSchema}
           onSubmit={(values, actions)=>{
             actions.resetForm();
-            addReview(values);
+            submitSignUpForm(values);
           }}
         >
           {(props)=>(

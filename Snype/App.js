@@ -10,6 +10,16 @@ export default function App() {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [signupModalOpen, setSignupModalOpen] = useState(false);
 
+  const submitLoginForm = (form) => {
+    console.log(form);
+    setLoginModalOpen(false);
+  }
+
+  const submitSignUpForm = (form) => {
+    console.log(form);
+    setSignupModalOpen(false);
+  }
+
   return (
     <View style={styles.container}>
       <Modal visible={loginModalOpen} animationType='slide'>
@@ -21,7 +31,7 @@ export default function App() {
               onPress = {()=>setLoginModalOpen(false)}
               style={{...styles.modalToggle, ...styles.modalClose}}
             />
-            <LoginForm/>
+            <LoginForm submitLoginForm={submitLoginForm}/>
           </View>
         </TouchableWithoutFeedback>
       </Modal>
@@ -34,7 +44,7 @@ export default function App() {
               onPress = {()=>setSignupModalOpen(false)}
               style={{...styles.modalToggle, ...styles.modalClose}}
             />
-            <SignUpForm/>
+            <SignUpForm submitSignUpForm={submitSignUpForm}/>
           </View>
         </TouchableWithoutFeedback>
       </Modal>
