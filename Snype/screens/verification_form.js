@@ -4,6 +4,12 @@ import {globalStyles} from '../styles/global';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import LoginSubmitButton from '../shared/login_submit_button';
+import Amplify, { Auth } from 'aws-amplify';
+import awsconfig from '../src/aws-exports';
+
+Amplify.configure(awsconfig);
+
+var successtoken = false;
 
 const reviewSchema = yup.object({
   verification: yup.string()
@@ -11,7 +17,20 @@ const reviewSchema = yup.object({
     .min(4)
 })
 
-export default function VerificationForm({submitVerificationForm}) {
+const verify = (value, {submitVerificationForm}, {globalUsername}) => {
+    if (JSON.stringify(value['verification']).replace(/[^0-9]/g,'') != '') {
+      Auth.confirmSignUp(globalUsername, JSON.stringify(value['verification']).replace(/[^0-9]/g,''))
+      .then(res =>{
+          console.log('Verified!', res)
+          submitVerificationForm(value)
+        })
+      .catch(err=>{
+          console.log('Error Verified!', err)
+        })
+    }
+  }
+
+export default function VerificationForm({submitVerificationForm,globalUsername}) {
 
     return (
       <View style={globalStyles.container}>
@@ -20,7 +39,7 @@ export default function VerificationForm({submitVerificationForm}) {
           validationSchema={reviewSchema}
           onSubmit={(values, actions)=>{
             actions.resetForm();
-            submitVerificationForm(values);
+            verify(values, {submitVerificationForm}, {globalUsername});
           }}
         >
           {(props)=>(

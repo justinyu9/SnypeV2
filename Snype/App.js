@@ -16,6 +16,7 @@ function App() {
         <Stack.Screen name="Main"
           component={Main}
           options={{
+          headerTitle:"Snype",
           headerLeft: null,
         }}/>
       </Stack.Navigator>

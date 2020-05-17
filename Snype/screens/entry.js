@@ -12,14 +12,17 @@ export default function Entry({navigation}) {
   const [signupModalOpen, setSignupModalOpen] = useState(false);
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
 
+  const [globalUsername, setGlobalUsername] = useState('false');
+
   const submitLoginForm = (form) => {
     console.log(form);
     setLoginModalOpen(false);
+    navigation.navigate('Main')
   }
 
   const submitSignUpForm = (form) => {
-    console.log(form);
     setSignupModalOpen(false);
+    setGlobalUsername(form['username']);
     setConfirmModalOpen(true);
   }
 
@@ -65,7 +68,7 @@ export default function Entry({navigation}) {
               onPress = {()=>setConfirmModalOpen(false)}
               style={{...styles.modalToggle, ...styles.modalClose}}
             />
-            <VerificationForm submitVerificationForm={submitVerificationForm}/>
+            <VerificationForm submitVerificationForm={submitVerificationForm} globalUsername={globalUsername}/>
           </View>
         </TouchableWithoutFeedback>
       </Modal>

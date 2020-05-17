@@ -45,9 +45,22 @@ export default function SignUpForm({submitSignUpForm}) {
   }
 
   const aws_signup = (value) => {
-      console.log("AWS SIGN UP")
-      console.log(value);
-      console.log(value['email']);
+      // So far phone numbers only enter as 7 digits number with no dashes, need to fix. So added extension
+      var extension = '+1';
+      Auth.signUp({
+        username: value['username'],
+        password: value['password'],
+        attributes:{
+          email: value['email'],
+          phone_number:extension.concat(value['phone_number']),
+        },
+      })
+      .then(res =>{
+          console.log('Signed up!', res)
+        })
+      .catch(err=>{
+          console.log('Error Sign up!', err)
+        })
     }
 
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
@@ -65,7 +78,6 @@ export default function SignUpForm({submitSignUpForm}) {
           initialValues={{ username: '', email: '', password: '',  verify_password: '',  phone_number: ''}}
           validationSchema={reviewSchema}
           onSubmit={(values, actions)=>{
-            console.log("LOOOL THIS IS GREAT")
             aws_signup(values);
             actions.resetForm();
             submitSignUpForm(values);
