@@ -1,9 +1,14 @@
-import React from 'react';
-import { StyleSheet, Button, View, TextInput, Text } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Button, View, TextInput, Text, ModTouchableOpacity, Modal, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import {MaterialIcons} from '@expo/vector-icons';
 import {globalStyles} from '../styles/global';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import SignupSubmitButton from '../shared/signup_submit_button';
+import Amplify, { Auth } from 'aws-amplify';
+import awsconfig from '../src/aws-exports';
+
+Amplify.configure(awsconfig);
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
@@ -33,14 +38,38 @@ const reviewSchema = yup.object({
 
 export default function SignUpForm({submitSignUpForm}) {
 
+  const [authCode, setAuthCode] = useState('0');
+
+  const onChangeText = (value) => {
+    setAuthCode(value)
+  }
+
+  const aws_signup = (value) => {
+      console.log("AWS SIGN UP")
+      console.log(value);
+      console.log(value['email']);
+    }
+
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+
+  const [submitted, setSubmitted] = useState(false);
+
+  const submitConfirmForm = (form) => {
+    console.log(form);
+    setConfirmModalOpen(false);
+  }
+
     return (
       <View style={globalStyles.container}>
         <Formik
           initialValues={{ username: '', email: '', password: '',  verify_password: '',  phone_number: ''}}
           validationSchema={reviewSchema}
           onSubmit={(values, actions)=>{
+            console.log("LOOOL THIS IS GREAT")
+            aws_signup(values);
             actions.resetForm();
             submitSignUpForm(values);
+
           }}
         >
           {(props)=>(
@@ -97,3 +126,27 @@ export default function SignUpForm({submitSignUpForm}) {
     )
 
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalToggle:{
+      marginBottom: 10,
+      borderWidth: 1,
+      borderColor: '#f2f2f2',
+      padding: 10,
+      borderRadius: 10,
+      alignSelf: 'center',
+    },
+  modalClose:{
+    marginTop: 20,
+    marginBottom: 0,
+  },
+  modalContent:{
+    flex: 1,
+  },
+});
