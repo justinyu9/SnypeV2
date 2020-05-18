@@ -3,11 +3,12 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { SimpleLineIcons, Octicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import SwipeCards from './swipe_cards';
 
-  function Feed() {
+  function Search() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Implement Swiping here!</Text>
+        <SwipeCards/>
       </View>
     );
   }
@@ -20,7 +21,7 @@ import { SimpleLineIcons, Octicons, MaterialCommunityIcons } from '@expo/vector-
     );
   }
 
-  function Notifications() {
+  function Settings() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Show allergies and preferences here</Text>
@@ -33,15 +34,15 @@ import { SimpleLineIcons, Octicons, MaterialCommunityIcons } from '@expo/vector-
   function Main() {
     return (
       <Tab.Navigator
-        initialRouteName="Feed"
+        initialRouteName="Search"
         activeColor="white"
         labelStyle={{ fontSize: 12 }}
         style={{ backgroundColor: 'black' }}
         barStyle={{ backgroundColor: 'black' }}
       >
         <Tab.Screen
-          name="Feed"
-          component={Feed}
+          name="Search"
+          component={Search}
           options={{
             tabBarLabel: 'Search',
             tabBarIcon: ({ color }) => (
@@ -50,8 +51,8 @@ import { SimpleLineIcons, Octicons, MaterialCommunityIcons } from '@expo/vector-
           }}
         />
         <Tab.Screen
-          name="Notifications"
-          component={Notifications}
+          name="Profile"
+          component={Profile}
           options={{
             tabBarLabel: 'Profile',
             tabBarIcon: ({ color }) => (
@@ -60,8 +61,8 @@ import { SimpleLineIcons, Octicons, MaterialCommunityIcons } from '@expo/vector-
           }}
         />
         <Tab.Screen
-          name="Profile"
-          component={Profile}
+          name="Settings"
+          component={Settings}
           options={{
             tabBarLabel: 'Settings',
             tabBarIcon: ({ color }) => (
