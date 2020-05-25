@@ -3,12 +3,12 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { SimpleLineIcons, Octicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import SwipeCards from './swipe_cards';
+import Swipe_Page from './swipe';
 
   function Search() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <SwipeCards/>
+      <View style={{ flex: 1}}>
+        <Swipe_Page/>
       </View>
     );
   }
