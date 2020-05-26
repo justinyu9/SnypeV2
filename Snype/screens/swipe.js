@@ -1,9 +1,20 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Button, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, ImageBackground, Modal, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import StarButton from '../shared/star_button';
+import {MaterialIcons} from '@expo/vector-icons';
 
 export default function Swipe_Page() {
+
+  const openModal = (image) => {
+    console.log(image);
+    setClickedCard(image);
+    console.log(clickedCard)
+    setCardModalOpen(true);
+  }
+  const [cardModalOpen, setCardModalOpen] = useState(false);
+  const [clickedCard, setClickedCard] = useState('');
+
   const [food_cards, setfood_cards] = useState([
     {name: 'Burger', image: 'https://natashaskitchen.com/wp-content/uploads/2019/04/Best-Burger-4.jpg'},
     {name: 'Hotpot', image: 'https://static01.nyt.com/images/2019/08/27/dining/27REST-DAL-slide-N2XY/27REST-DAL-slide-N2XY-superJumbo.jpg'},
@@ -21,6 +32,22 @@ export default function Swipe_Page() {
   ]);
   return (
     <View style={styles.container}>
+        <Modal visible={cardModalOpen} animationType='slide'>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <ScrollView vertical={true} style={styles.scrollView}>
+              <MaterialIcons
+                name='close'
+                size={28}
+                onPress = {()=>setCardModalOpen(false)}
+                style={{...styles.modalToggle, ...styles.modalClose}}
+              />
+                <ImageBackground source={{uri: clickedCard}} style={styles.backgroundImageCard}>
+                </ImageBackground>
+                <Text>Tapped on a card</Text>
+
+            </ScrollView>
+          </TouchableWithoutFeedback>
+        </Modal>
         <Swiper
             cards={food_cards}
             renderCard={(card) => {
@@ -38,7 +65,7 @@ export default function Swipe_Page() {
             onSwipedRight={() => {console.log('Swiped right')}}
             onSwipedTop={() => {console.log('Swiped up')}}
             onSwipedBottom={() => {console.log('Swiped down')}}
-            onTapCard={() => {console.log('Tapped card')}}
+            onTapCard={(cardIndex)=>openModal(food_cards[cardIndex]['image'] )}
             onSwiped={(cardIndex) => {console.log(food_cards[cardIndex]['name'])}}
             onSwipedAll={() => {console.log('onSwipedAll')}}
             cardIndex={0}
@@ -71,5 +98,30 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover', // or 'stretch'
-  }
+  },
+  backgroundImageCard: {
+    padding: 150,
+    marginTop: 20,
+    alignSelf: 'center',
+    resizeMode: 'cover',
+  },
+  modalToggle:{
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#f2f2f2',
+    padding: 10,
+    borderRadius: 10,
+    alignSelf: 'center',
+  },
+  modalClose:{
+    marginTop: 20,
+    marginBottom: 0,
+  },
+  modalContent:{
+    flex: 1,
+  },
+  scrollView:{
+    backgroundColor: 'white',
+    padding: 10
+  },
 });
