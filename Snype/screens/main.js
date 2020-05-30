@@ -2,34 +2,15 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { SimpleLineIcons, Octicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import Swipe_Page from './swipe';
-
-  function Search() {
-    return (
-      <View style={{ flex: 1}}>
-        <Swipe_Page/>
-      </View>
-    );
-  }
-
-  function Profile() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Show user preferences here</Text>
-      </View>
-    );
-  }
-
-  function Settings() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Show allergies and preferences here</Text>
-      </View>
-    );
-  }
+import Profile_Tab from './profile';
+import Settings_Tab from './settings';
 
   const Tab = createMaterialBottomTabNavigator();
+
+  const Drawer = createDrawerNavigator();
 
   function Main() {
     return (
@@ -41,8 +22,8 @@ import Swipe_Page from './swipe';
         barStyle={{ backgroundColor: 'black' }}
       >
         <Tab.Screen
-          name="Search"
-          component={Search}
+          name="Swipe_Page"
+          component={Swipe_Page}
           options={{
             tabBarLabel: 'Search',
             tabBarIcon: ({ color }) => (
@@ -51,8 +32,8 @@ import Swipe_Page from './swipe';
           }}
         />
         <Tab.Screen
-          name="Profile"
-          component={Profile}
+          name="Profile_Tab"
+          component={Profile_Tab}
           options={{
             tabBarLabel: 'Profile',
             tabBarIcon: ({ color }) => (
@@ -61,8 +42,8 @@ import Swipe_Page from './swipe';
           }}
         />
         <Tab.Screen
-          name="Settings"
-          component={Settings}
+          name="Settings_Tab"
+          component={Settings_Tab}
           options={{
             tabBarLabel: 'Settings',
             tabBarIcon: ({ color }) => (
@@ -76,6 +57,8 @@ import Swipe_Page from './swipe';
 
   export default function TabScreen() {
     return (
-        <Main />
+      <Drawer.Navigator initialRouteName="Home">
+          <Drawer.Screen name="Main" component={Main} />
+      </Drawer.Navigator>
     );
   }

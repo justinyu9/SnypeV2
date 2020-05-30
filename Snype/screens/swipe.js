@@ -22,7 +22,7 @@ export default function Swipe_Page() {
     {name: 'Halal Guys', image: 'https://s3.amazonaws.com/bncore/wp-content/uploads/2018/08/halal-guys-product-spread.jpg'},
     {name: 'Hot Dogs', image: 'https://5i0b63wqszy3rogfx27pxco1-wpengine.netdna-ssl.com/wp-content/uploads/Basic-Hot-Dogs-600x500.jpg'},
     {name: 'Cajun Seafood', image: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimg1.coastalliving.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2Fimage%2F2018%2F03%2Fmain%2F4085501_crawfish-boil.jpg%3Fitok%3DhGzCef7C'},
-    {name: 'Fried Chicken', image: 'https://media.giphy.com/media/K6Q7ZCdLy8pCE/giphy.https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Crispy-Fried-Chicken_EXPS_FRBZ19_6445_C01_31_3b.jpg'},
+    {name: 'Fried Chicken', image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2012/11/2/0/DV1510H_fried-chicken-recipe-10_s4x3.jpg.rend.hgtvcom.826.620.suffix/1568222255998.jpeg'},
     {name: 'Pasta', image: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-190903-pasta-pomodoro-0201-landscape-pf-1568667704.jpg?crop=0.668xw:1.00xh;0.158xw,0&resize=480:*'},
     {name: 'Dim Sum', image: 'https://www.dimsumcentral.com/wp-content/uploads/2018/06/what-is-dim-sum-header-new.jpg'},
     {name: 'Pho', image: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Pho-Beef-Noodles-2008.jpg'},
