@@ -57,7 +57,7 @@ import Settings_Tab from './settings';
 
   export default function TabScreen() {
     return (
-      <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Navigator initialRouteName="Main">
           <Drawer.Screen name="Main" component={Main} />
       </Drawer.Navigator>
     );

@@ -1,32 +1,37 @@
 import * as React from 'react';
 import { View, Text, Button, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Main from './screens/main';
-import Entry from './screens/entry';
-import Profile_Tab from './screens/profile';
-import {MaterialIcons} from '@expo/vector-icons';
-
-const Stack = createStackNavigator();
+import Header from "./shared/header";
+import EntryNavigator from './routes/entryStack';
+import MainNavigator from './routes/mainStack';
+import FaqNavigator from './routes/faqStack';
 
 const Drawer = createDrawerNavigator();
 
-function App({navigation}) {
+function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Entry">
-        <Stack.Screen name="Snype"
-          component={Entry} />
-        <Stack.Screen name="Main"
-          component={Main}
-          options={({ navigation }) => ({
-            title: 'Snype',
-            headerLeft: false,
-            headerRight: () =>
-                <MaterialIcons name="menu" size={28} onPress={() => navigation.openDrawer()} style={styles.icon}/>,
-            headerLeftContainerStyle: { paddingLeft: 10 } })}/>
-      </Stack.Navigator>
+      <Drawer.Navigator initialRouteName="Entry" screenOptions={{ gestureEnabled: false }} drawerPosition="right">
+          <Drawer.Screen
+            name="Entry"
+            component={EntryNavigator}
+            options={{
+                title: 'Logout',
+            }}
+             />
+          <Drawer.Screen name="Faq" component={FaqNavigator} />
+          <Drawer.Screen
+            name="Main"
+            component={MainNavigator}
+            options={{
+                drawerLabel: () => null,
+                title: null,
+                drawerIcon: () => null
+            }}
+             />
+      </Drawer.Navigator>
+
     </NavigationContainer>
   );
 }

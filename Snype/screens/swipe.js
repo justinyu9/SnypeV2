@@ -69,7 +69,7 @@ export default function Swipe_Page() {
             onSwiped={(cardIndex) => {console.log(food_cards[cardIndex]['name'])}}
             onSwipedAll={() => {console.log('onSwipedAll')}}
             cardIndex={0}
-            backgroundColor={'black'}
+            backgroundColor={'#696969'}
             useViewOverflow={Platform.OS === 'ios'}
             stackSize= {3}>
         </Swiper>
