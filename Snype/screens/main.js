@@ -15,7 +15,7 @@ import Settings_Tab from './settings';
   function Main() {
     return (
       <Tab.Navigator
-        initialRouteName="Search"
+        initialRouteName="Swipe_Page"
         activeColor="white"
         labelStyle={{ fontSize: 12 }}
         style={{ backgroundColor: 'black' }}

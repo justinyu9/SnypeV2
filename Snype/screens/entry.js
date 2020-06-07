@@ -75,7 +75,6 @@ export default function Entry({navigation}) {
       <LoginButton text='Login' onPress = {()=>setLoginModalOpen(true)}/>
       <LoginButton text='Signup' onPress = {()=>setSignupModalOpen(true)}/>
       <LoginButton text='Go to Main Page' onPress={() => navigation.navigate('Main')}/>
-
     </View>
   );
 }
