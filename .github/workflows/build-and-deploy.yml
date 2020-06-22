@@ -1,6 +1,8 @@
 name: Build and Deploy
-on: push
-
+on:
+  push:
+    branches:
+      - master
 jobs:
   build:
     name: Build
@@ -9,11 +11,9 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: "12"
+          node-version: '12'
       - name: Checkout Repo
-        uses: |
-          actions/checkout@master
-          cd /backend
+        uses: actions/checkout@master
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"

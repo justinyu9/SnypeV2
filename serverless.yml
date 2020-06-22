@@ -1,6 +1,6 @@
 service: snype
 app: snype
-org: halfwaythere
+org: justinyu9
 
 custom:
   webpack:
