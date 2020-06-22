@@ -21,13 +21,13 @@ provider:
 
 functions:
   hello:
-    handler: src/handler.hello
+    handler: backend/src/handler.hello
     events:
       - http:
           method: get
           path: hello
   hi:
-    handler: src/handler.hi
+    handler: backend/src/handler.hi
     events:
       - http:
           method: get

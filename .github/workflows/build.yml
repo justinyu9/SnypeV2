@@ -2,8 +2,8 @@ name: Build
 on:
   push:
     branches:
-      - '*'
-      - '!master'
+      - "*"
+      - "!master"
 jobs:
   build:
     name: Build
@@ -12,9 +12,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: '12'
+          node-version: "12"
       - name: Checkout Repo
         uses: actions/checkout@master
+      - name: Install Serverless deps
+        run: yarn add serverless-webpack webpack serverless-offline
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -36,14 +38,16 @@ jobs:
             ${{ runner.os }}-${{ matrix.node-version }}-nodemodules-
       - name: Install dependencies
         run: yarn
+        working-directory: backend
         if: |
           steps.yarn-cache.outputs.cache-hit != 'true' ||
           steps.cache-node-modules.outputs.cache-hit != 'true'
       - name: Run tests
         run: yarn test
-      - name: Deploy application
+        working-directory: backend
+      - name: Build application
         uses: serverless/github-action@master
         with:
-          args: package
+          args: package --config ./backend/serverless.yml
         env:
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
